@@ -1,0 +1,47 @@
+---
+title: 'Drake Data: 9/25/21'
+author: "Ben VanderWall"
+date: "9/21/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+```{r}
+data <- readxl::read_excel("Data/Drake DF.xlsx")
+data
+data <- data %>% filter(row_number() <= n()-1)
+data
+
+data$Goals <- gsub("-","0",data$Goals)
+data$Goals <- as.numeric(data$Goals)
+
+df <- form_mean("Goals", "Goals (Average Per Game)")
+df2 <- form_sum("Goals", "Goals (Total)")
+df3 <- 
+
+
+```
+
+```{r}
+form_mean <- function(col, row_name) {
+  vec <- pull(data, col)
+  df <- data.frame(mean(vec[1:3]), mean(vec[1:5]), mean(vec))
+  colnames(df) <- (c("Last 3", "Last 5", "Season"))
+  rownames(df) <- (row_name)
+  df
+}
+
+form_sum <- function(col, row_name) {
+ vec <- pull(data, col)
+ df <- data.frame(sum(vec[1:3]), sum(vec[1:5]), sum(vec))
+ colnames(df) <- (c("Last 3", "Last 5", "Season"))
+ rownames(df) <- (row_name)
+ df
+ 
+}
+```
+
