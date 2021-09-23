@@ -1,4 +1,4 @@
----
+= ---
 title: 'Drake Data: 9/25/21'
 author: "Ben VanderWall"
 date: "9/21/2021"
@@ -11,26 +11,169 @@ library(tidyverse)
 ```
 
 ```{r}
+# Needed features
+#   - % of efficiency for each variable
+
 data <- readxl::read_excel("Data/Drake DF.xlsx")
 data <- data %>% filter(row_number() <= n()-1)
 
 df <- form_sum("Goals")
 df2 <- form_sum("Shots")
-df3 <- form_sum("Shots on Target")
-df4 <- form_sum("Chances")
-df5 <- form_sum("Key Passes")
-df6 <- form_sum("Key Passes Accurate")
-df7 <- form_sum("Crosses")
+df3 <- form_sum("Shots on target")
+df4 <- form_sum("xG (Expected goals)")
+df5 <- form_sum("xG conversion")
+df6 <- form_sum("xG per shot")
+df7 <- form_sum("xG per goal")
+df8 <- form_sum("Corners")
+df9 <- form_sum("Net xG (xG - Opponent's xG)")
+df10 <- form_sum("Expected points")
 
+attack_sum_table <- rbind(df,df2,df3,df4,df5,df6,df7,df8,df9,df10)
 
-df4 <- form_sum("Fouls")
+df <- form_sum("Passes")
+df2 <- form_sum("Accurate passes")
+df3 <- form_sum("Chances")
+df4 <- form_sum("Chances successful")
+df5 <- form_sum("Accurate passes")
+df6 <- form_sum("Key passes")
+df7 <- form_sum("Key passes accurate")
+df8 <- form_sum("Crosses")
+df9 <- form_sum("Crosses accurate")
+df10 <- form_sum("Dribbles")
+df11 <- form_sum("Dribbles successful")
+df12 <- form_sum("Lost balls")
+df13 <- form_sum("Lost balls in own half")
+df14 <- form_sum("Entrances on opponent's half")
+df15 <- form_sum("Entrances on final third of opponent's half")
+df16 <- form_sum("Entrances to the opponent's box")
+
+buildup_sum_table <- rbind(df,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12,df13,df14,df15,df16)
+
+df <- form_sum("Attacks - left flank")
+df2 <- form_sum("Attacks with shots - left flank")
+df3 <- form_sum("Attacks - center")
+df4 <- form_sum("Attacks with shots - center")
+df5 <- form_sum("Attacks - right flank")
+df6 <- form_sum("Attacks with shots - right flank")
+df7 <- form_sum("Positional attacks")
+df8 <- form_sum("Positional attacks with shots")
+df9 <- form_sum("Counter-attacks")
+df10 <- form_sum("Counter-attacks with a shot")
+df11 <- form_sum("Set pieces attacks")
+df12 <- form_sum("Attacks with shots - Set pieces attacks")
+df13 <- form_sum("Free-kick attacks")
+df14 <- form_sum("Free-kick attacks with shots")
+df15 <- form_sum("Corner attacks")
+df16 <- form_sum("Corner attacks with shots")
+
+attack_typology_sum_table <-
+  rbind(df,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12,df13,df14,df15,df16)
+
+df <- form_sum("Challenges")
+df2 <- form_sum("Challenges won")
+df3 <- form_sum("Attacking challenges")
+df4 <- form_sum("Attacking challenges won")
+df5 <- form_sum("Defensive challenges")
+df6 <- form_sum("Defensive challenges won")
+df7 <- form_sum("Air challenges")
+df8 <- form_sum("Air challenges won")
+df9 <- form_sum("Tackles")
+df10 <- form_sum("Tackles successful")
+df11 <- form_sum("Fouls")
+df12 <- form_sum("Ball recoveries")
+df13 <- form_sum("Ball recoveries in opponent's half")
+df14 <- form_sum("Ball interceptions")
+df15 <- form_sum("Free ball pick ups")
+df16 <- form_sum("Team pressing")
+df17 <- form_sum("Opponent's xG")
+df18 <- form_sum("Opponent's xG per shot")
+
+defense_sum_table <- 
+  rbind(df,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12,df13,df14,df15,df16,df17,df18)
 
 
 df <- form_mean("Goals")
-df2 <- form_mean("Chances")
+df2 <- form_mean("Shots")
+df3 <- form_mean("Shots on target")
+df4 <- form_mean("xG (Expected goals)")
+df5 <- form_mean("xG conversion")
+df6 <- form_mean("xG per shot")
+df7 <- form_mean("xG per goal")
+df8 <- form_mean("Corners")
+df9 <- form_mean("Net xG (xG - Opponent's xG)")
+df10 <- form_mean("Expected points")
+
+attack_mean_table <- rbind(df,df2,df3,df4,df5,df6,df7,df8,df9,df10)
+
+df <- form_mean("Passes")
+df2 <- form_mean("Accurate passes")
+df3 <- form_mean("Chances")
+df4 <- form_mean("Chances successful")
+df5 <- form_mean("Accurate passes")
+df6 <- form_mean("Key passes")
+df7 <- form_mean("Key passes accurate")
+df8 <- form_mean("Crosses")
+df9 <- form_mean("Crosses accurate")
+df10 <- form_mean("Dribbles")
+df11 <- form_mean("Dribbles successful")
+df12 <- form_mean("Lost balls")
+df13 <- form_mean("Lost balls in own half")
+df14 <- form_mean("Entrances on opponent's half")
+df15 <- form_mean("Entrances on final third of opponent's half")
+df16 <- form_mean("Entrances to the opponent's box")
+
+buildup_mean_table <- rbind(df,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12,df13,df14,df15,df16)
+
+df <- form_mean("Attacks - left flank")
+df2 <- form_mean("Attacks with shots - left flank")
+df3 <- form_mean("Attacks - center")
+df4 <- form_mean("Attacks with shots - center")
+df5 <- form_mean("Attacks - right flank")
+df6 <- form_mean("Attacks with shots - right flank")
+df7 <- form_mean("Positional attacks")
+df8 <- form_mean("Positional attacks with shots")
+df9 <- form_mean("Counter-attacks")
+df10 <- form_mean("Counter-attacks with a shot")
+df11 <- form_mean("Set pieces attacks")
+df12 <- form_mean("Attacks with shots - Set pieces attacks")
+df13 <- form_mean("Free-kick attacks")
+df14 <- form_mean("Free-kick attacks with shots")
+df15 <- form_mean("Corner attacks")
+df16 <- form_mean("Corner attacks with shots")
+
+attack_typology_mean_table <-
+  rbind(df,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12,df13,df14,df15,df16)
+
+df <- form_mean("Challenges")
+df2 <- form_mean("Challenges won")
+df3 <- form_mean("Attacking challenges")
+df4 <- form_mean("Attacking challenges won")
+df5 <- form_mean("Defensive challenges")
+df6 <- form_mean("Defensive challenges won")
+df7 <- form_mean("Air challenges")
+df8 <- form_mean("Air challenges won")
+df9 <- form_mean("Tackles")
+df10 <- form_mean("Tackles successful")
+df11 <- form_mean("Fouls")
+df12 <- form_mean("Ball recoveries")
+df13 <- form_mean("Ball recoveries in opponent's half")
+df14 <- form_mean("Ball interceptions")
+df15 <- form_mean("Free ball pick ups")
+df16 <- form_mean("Team pressing")
+df17 <- form_mean("Opponent's xG")
+df18 <- form_mean("Opponent's xG per shot")
+
+defense_mean_table <- 
+  rbind(df,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12,df13,df14,df15,df16,df17,df18)
 ```
 
 ```{r}
+
+```
+
+
+```{r}
+# Potential upgrade: add name factor that defaults to col unless otherwise specified
 form_mean <- function(col) {
   vec <- pull(data, col)
   vec <- gsub("-", "0", vec)
