@@ -1,0 +1,11 @@
+Stats,Last 3,Last 5,Season
+Goals,4,6,9
+Shots,24,50,82
+Shots on target,13,27,42
+xG (Expected goals),2.98,6.28,9.41
+xG conversion,4.93,6.19,10.38
+xG per shot,0.38,0.63,1.24
+xG per goal,1.61,4.91,5.95
+Corners,9,17,29
+Net xG (xG - Opponent's xG),-2.8899999999999997,-2.11,-7.9399999999999995
+Expected points,2.8,6,8.7

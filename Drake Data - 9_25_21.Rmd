@@ -168,7 +168,14 @@ defense_mean_table <-
 ```
 
 ```{r}
-
+write_csv(attack_sum_table, file = "Attack Sum Table.csv")
+write_csv(attack_mean_table, file = "Attack Mean Table.csv")
+write_csv(attack_typology_sum_table, file = "Attack Typology Sum Table.csv")
+write_csv(attack_typology_mean_table, file = "Attack Typology Mean Table.csv")
+write_csv(buildup_sum_table, file = "Buildup Sum Table.csv")
+write_csv(buildup_mean_table, file = "Buildup Mean Table.csv")
+write_csv(defense_sum_table, file = "Defense Sum Table.csv")
+write_csv(defense_mean_table, file = "Defense Mean Table.csv")
 ```
 
 
