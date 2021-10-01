@@ -41,6 +41,9 @@ valpo <- read_excel("Data/Valparaiso - 10.3.21.xlsx", na = "-") %>%
 data <- bind_rows(drake, illinois_state, indiana_state, loyola, ue, siu, uni, valpo) %>%
           select(-c(46, 49, 43))
 data[is.na(data)] = 0
+
+means <- summarise_all(data, mean)
+data <- bind_rows(data, means)
 ```
 
 
