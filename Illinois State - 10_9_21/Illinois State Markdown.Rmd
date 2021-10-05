@@ -1,0 +1,15 @@
+---
+title: "Illinois State Report - 10_9_21"
+author: "Ben VanderWall"
+date: "10/5/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+```{r}
+source("../Overall/League Averager.R", chdir = TRUE)
+```
