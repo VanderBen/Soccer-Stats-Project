@@ -18,7 +18,18 @@ attack <- attack_creator(illinois_state)
 type <- type_creator(illinois_state)
 buildup <- buildup_creator(illinois_state)
 defense <- defense_creator(illinois_state)
+
+export_attack <- slice(attack, c(1, 4))
+export_type <- slice(type, c(7, 9))
+export_attack <- bind_rows(export_attack, export_type)
+export_buildup <- slice(buildup, c(5, 3, 4, 11))
+export_defense <- slice(defense, c(18))
+
+write_csv(export_attack, file = "Attack Table.csv")
+write_csv(export_buildup, file = "Buildup Table.csv")
+write_csv(export_defense, file = "Defense Table.csv")
 ```
+
 
 
 
