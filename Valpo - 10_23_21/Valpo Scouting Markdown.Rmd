@@ -1,0 +1,28 @@
+---
+title: "Valpo Scouting Report"
+author: "Ben VanderWall"
+date: "10/19/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+```{r}
+source("../Overall/League Averager.R", chdir = TRUE)
+source("../Overall/Form Creator.R", chdir = TRUE)
+valpo[is.na(valpo)] = 0
+attack <- attack_creator(valpo)
+type <- type_creator(valpo)
+buildup <- buildup_creator(valpo)
+defense <- defense_creator(valpo)
+
+export_attack <- slice(attack, c(1, 4, 3, 9))
+
+write_csv(export_attack, file = "Attack Table.csv")
+write_csv(export_buildup, file = "Buildup Table.csv")
+write_csv(export_defense, file = "Defense Table.csv")
+```
+
