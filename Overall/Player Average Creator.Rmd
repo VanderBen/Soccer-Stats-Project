@@ -1,0 +1,33 @@
+---
+title: "Player Average Creator"
+author: "Ben VanderWall"
+date: "10/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(readxl)
+```
+
+```{r}
+drake <- read_excel("Data/Drake Players.xlsx", na = "-")
+ue <- read_excel("Data/Evansville Players.xlsx",  na = "-")
+illinois_state <- read_excel("Data/Illinois State Players.xlsx", na = "-")
+indiana_state <- read_excel("Data/Indiana State Players.xlsx", na = "-")
+loyola <- read_excel("Data/Loyola Players.xlsx", na = "-")
+siu <- read_excel("Data/SIU Players.xlsx", na = "-")
+uni <- read_excel("Data/UNI Players.xlsx", na = "-")
+valpo <- read_excel("Data/Valpo Players.xlsx", na = "-")
+
+league <- bind_rows(drake, illinois_state, indiana_state, loyola, ue, siu, uni, valpo)
+league[is.na(league)] = 0
+
+forward <- filter(ue, Position == "F")
+winger <- filter(ue, Position == "RM" | Position == "LM")
+midfielder <- filter(ue, Position == "DM" | Position == "CM")
+defender <- filter(ue, Position == "CD")
+fullback <- filter(ue, Position == "RD" | Position == "LD")
+```
+
