@@ -21,13 +21,29 @@ siu <- read_excel("Data/SIU Players.xlsx", na = "-")
 uni <- read_excel("Data/UNI Players.xlsx", na = "-")
 valpo <- read_excel("Data/Valpo Players.xlsx", na = "-")
 
+
+drake <- filter(drake, Team == "Drake")
+ue <- filter(ue, Team == "Evansville")
+illinois_state <- filter(illinois_state, Team == "Illinois")
+indiana_state <- filter(indiana_state, Team == "Indiana")
+loyola <- filter(loyola, Team == "Loyola")
+siu <- filter(siu, Team == "Salukis")
+uni <- filter(uni, Team == "Northern Iowa")
+valpo <- filter(valpo, Team == "Valparaiso")
+
+
 league <- bind_rows(drake, illinois_state, indiana_state, loyola, ue, siu, uni, valpo)
 league[is.na(league)] = 0
 
-forward <- filter(ue, Position == "F")
-winger <- filter(ue, Position == "RM" | Position == "LM")
-midfielder <- filter(ue, Position == "DM" | Position == "CM")
-defender <- filter(ue, Position == "CD")
-fullback <- filter(ue, Position == "RD" | Position == "LD")
+forward <- filter(league, Position == "F")
+winger <- filter(league, Position == "RM" | Position == "LM")
+midfielder <- filter(league, Position == "DM" | Position == "CM")
+defender <- filter(league, Position == "CD")
+fullback <- filter(league, Position == "RD" | Position == "LD")
+```
+
+
+```{r}
+
 ```
 
