@@ -12,7 +12,7 @@ library(readxl)
 ```
 
 ```{r}
-drake <- read_excel("Data/Drake Players.xlsx", na = "-")
+#drake <- read_excel("Data/Drake Players.xlsx", na = "-")
 ue <- read_excel("Data/Evansville Players.xlsx",  na = "-")
 illinois_state <- read_excel("Data/Illinois State Players.xlsx", na = "-")
 indiana_state <- read_excel("Data/Indiana State Players.xlsx", na = "-")
@@ -22,7 +22,7 @@ uni <- read_excel("Data/UNI Players.xlsx", na = "-")
 valpo <- read_excel("Data/Valpo Players.xlsx", na = "-")
 
 
-drake <- filter(drake, Team == "Drake")
+#drake <- filter(drake, Team == "Drake")
 ue <- filter(ue, Team == "Evansville")
 illinois_state <- filter(illinois_state, Team == "Illinois")
 indiana_state <- filter(indiana_state, Team == "Indiana")
@@ -31,19 +31,56 @@ siu <- filter(siu, Team == "Salukis")
 uni <- filter(uni, Team == "Northern Iowa")
 valpo <- filter(valpo, Team == "Valparaiso")
 
+league_players <- bind_rows(illinois_state, indiana_state, loyola, ue, siu, uni, valpo)
+league_players[is.na(league_players)] = 0
+valpo[is.na(valpo)] = 0
+uni[is.na(uni)] = 0
+siu[is.na(siu)] = 0
+loyola[is.na(loyola)] = 0
+indiana_state[is.na(indiana_state)] = 0
+illinois_state[is.na(illinois_state)] = 0
+ue[is.na(ue)] = 0
+#drake[is.na(drake)] = 0
 
-league <- bind_rows(drake, illinois_state, indiana_state, loyola, ue, siu, uni, valpo)
-league[is.na(league)] = 0
 
-forward <- filter(league, Position == "F")
-winger <- filter(league, Position == "RM" | Position == "LM")
-midfielder <- filter(league, Position == "DM" | Position == "CM")
-defender <- filter(league, Position == "CD")
-fullback <- filter(league, Position == "RD" | Position == "LD")
+forward <- filter(league_players, Position == "F")
+winger <- filter(league_players, Position == "RM" | Position == "LM")
+midfielder <- filter(league_players, Position == "DM" | Position == "CM")
+defender <- filter(league_players, Position == "CD")
+fullback <- filter(league_players, Position == "RD" | Position == "LD")
 ```
+
 
 
 ```{r}
+source("Player Scripts/Forward Functions.R")
 
+vforward <- form_mean_player("Valparaiso", forward)
+what <- forward_form("Valparaiso", vforward)
+
+
+name <- c(forward$`Player Name`, NA)
+position <- c(forward$Position, NA)
+team <- c(forward$Team, "League")
+
+forward <- select(forward, -`Player Name`, -Position, -Team)
+
+forward <- bind_rows(forward, summarize_all(forward, mean)) %>%
+  mutate(Name = name, .after = `Player Number`) %>%
+  mutate(Position = position, .after = Name) %>%
+  mutate(Team = team, .before = `Player Number`)
+
+vforward <- filter(forward, Team == "Valparaiso")
+league_forward <- filter(forward, Team == "League")
+vforward <- bind_rows(vforward, league_forward)
 ```
+
+
+
+
+
+
+
+
+
 
