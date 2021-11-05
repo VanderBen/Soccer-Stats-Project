@@ -20,6 +20,12 @@ buildup <- buildup_creator(valpo)
 defense <- defense_creator(valpo)
 
 export_attack <- slice(attack, c(1, 4, 3, 9))
+export_type <- slice(type, 6)
+export_attack <- bind_rows(export_attack, export_type)
+export_type2 <- slice(type, 8)
+export_buildup <- slice(buildup, c(2, 14, 15))
+export_buildup <- bind_rows(export_type2, export_buildup)
+export_defense <- slice(defense, c(1, 11, 17))
 
 write_csv(export_attack, file = "Attack Table.csv")
 write_csv(export_buildup, file = "Buildup Table.csv")
