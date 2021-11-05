@@ -55,24 +55,17 @@ fullback <- filter(league_players, Position == "RD" | Position == "LD")
 ```{r}
 source("Player Scripts/Forward Functions.R")
 
-vforward <- form_mean_player("Valparaiso", forward)
-what <- forward_form("Valparaiso", vforward)
+vforward <- forward_form(form_mean_player("Valparaiso", forward))
+vwinger <- winger_form(form_mean_player("Valparaiso", winger))
+vmidfielder <- midfielder_form(form_mean_player("Valparaiso", midfielder))
+vdefender <- defender_form(form_mean_player("Valparaiso", defender))
+vfullback <- fullback_form(form_mean_player("Valparaiso", fullback))
 
-
-name <- c(forward$`Player Name`, NA)
-position <- c(forward$Position, NA)
-team <- c(forward$Team, "League")
-
-forward <- select(forward, -`Player Name`, -Position, -Team)
-
-forward <- bind_rows(forward, summarize_all(forward, mean)) %>%
-  mutate(Name = name, .after = `Player Number`) %>%
-  mutate(Position = position, .after = Name) %>%
-  mutate(Team = team, .before = `Player Number`)
-
-vforward <- filter(forward, Team == "Valparaiso")
-league_forward <- filter(forward, Team == "League")
-vforward <- bind_rows(vforward, league_forward)
+write_csv(vforward, file = "Forward Table.csv")
+write_csv(vwinger, file = "Winger Table.csv")
+write_csv(vmidfielder, file = "Midfielder Table.csv")
+write_csv(vdefender, file = "Defender Table.csv")
+write_csv(vfullback, file = "Fullback Table.csv")
 ```
 
 
