@@ -1,0 +1,31 @@
+---
+title: "Miss. St Markdown"
+author: "Ben VanderWall"
+date: "10/26/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(readxl)
+```
+
+```{r}
+source("../Overall/League Averager.R", chdir = TRUE)
+source("../Overall/Form Creator.R", chdir = TRUE)
+miss[is.na(miss)] = 0
+attack <- attack_creator(miss)
+type <- type_creator(miss)
+buildup <- buildup_creator(miss)
+defense <- defense_creator(miss)
+
+export_attack <- slice(attack, c(4))
+export_buildup <- slice(buildup, c(9))
+export_attack <- bind_rows(export_attack, export_buildup)
+export_defense <- slice(defense, c(1, 3, 5, 15, 17))
+
+write_csv(export_attack, file = "Attack Table.csv")
+write_csv(export_defense, file = "Defense Table.csv")
+```
+
