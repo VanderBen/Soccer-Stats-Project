@@ -1,2 +1,2 @@
 Hello project
-whats up
+life is good
